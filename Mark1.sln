@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{8CA204E9-EA45-4C08-A400-5E976330E9F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{8CA204E9-EA45-4C08-A400-5E976330E9F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{8F3A6A2C-724D-4769-B04E-E0688914FF94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +24,10 @@ Global
 		{8CA204E9-EA45-4C08-A400-5E976330E9F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CA204E9-EA45-4C08-A400-5E976330E9F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CA204E9-EA45-4C08-A400-5E976330E9F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3A6A2C-724D-4769-B04E-E0688914FF94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3A6A2C-724D-4769-B04E-E0688914FF94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3A6A2C-724D-4769-B04E-E0688914FF94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3A6A2C-724D-4769-B04E-E0688914FF94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
