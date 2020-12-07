@@ -15,6 +15,6 @@ namespace DataAccess
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
-            => builder.UseSqlServer(@"Server=DORON-PC\SQLEXPRESS; Database=Mark1; Trusted_Connection=True;");
+            => builder.UseSqlServer(@"");
     }
 }
