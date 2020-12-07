@@ -5,11 +5,11 @@ using System.Text;
 
 namespace DataAccess
 {
-    class ContextApp : DbContext
+    class AppContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
 
-        public ContextApp()
+        public AppContext()
         {
             Database.EnsureCreated();
         }

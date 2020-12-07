@@ -11,7 +11,10 @@ namespace DataAccess
         public int Id { get; set; }
 
         [StringLength(20, MinimumLength = 5)]
-        public string Title { get; set; }       
+        public string Title { get; set; }
+
+        [MaxLength(100)]
+        public string Description { get; set; }
         
     }
 }
