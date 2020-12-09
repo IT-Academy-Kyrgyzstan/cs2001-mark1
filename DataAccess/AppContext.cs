@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace DataAccess
-{
-    class AppContext : DbContext
+{   
+    public class AppContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
-
+        
         public AppContext()
         {
             Database.EnsureCreated();
