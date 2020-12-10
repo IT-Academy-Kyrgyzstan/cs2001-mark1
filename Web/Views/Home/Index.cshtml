@@ -6,20 +6,23 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>
-        All product
-    </p>
-    @{
-        foreach (var product in @Model)
-        {
-            < div >
-              < h2 >
-                @product.Title
-                @product.Description
-        
-            </ h2 >
-            </ div >
-        }
-    }
+    <h1 class="display-4">
+        Welcome <br />
+        to the technology store
+    </h1>
 </div>
+<br />
+<p class="text-center" style="font-size: large"> All products:</p>
+
+@{
+    foreach (var product in @Model)
+    {
+        <form>
+            <img src="@product.Img" />
+            <h2>@product.Title</h2>
+            <p>@product.Description</p>
+            <br />
+        </form>
+    }
+}
+
