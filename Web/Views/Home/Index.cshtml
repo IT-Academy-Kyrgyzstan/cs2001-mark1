@@ -1,8 +1,28 @@
-﻿@{
+﻿@using DataAccess
+@model IEnumerable<Product>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">
+        Welcome <br />
+        to the technology store
+    </h1>
 </div>
+<br />
+<p class="text-center" style="font-size: large">All products:</p>
+
+<ul>
+    @{
+        foreach (var product in @Model)
+        {
+            <li>
+                <img src="@product.Image" />
+                <h2>@product.Title</h2>
+                <p>@product.Description</p>
+            </li>
+        }
+    }
+</ul>

@@ -15,6 +15,7 @@ namespace DataAccess
 
         [MaxLength(100)]
         public string Description { get; set; }
-        
+
+        public string Image { get; set; }
     }
 }
