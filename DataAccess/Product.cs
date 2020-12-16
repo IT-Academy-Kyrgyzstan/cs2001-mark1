@@ -20,7 +20,6 @@ namespace DataAccess
         public string Image { get; set; }
 
         [Range(typeof(decimal), "0", "9999999.99")]
-        [DefaultValue(0.01)]
         public decimal Price { get; set; }
     }
 }

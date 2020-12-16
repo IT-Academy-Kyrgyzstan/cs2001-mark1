@@ -61,7 +61,6 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  box-sizing:content-box;
 }
 .footer {
   position: absolute;
@@ -77,8 +76,6 @@ ul {
 
 .products_ul {
     display: block;
-    float: none;
-    position: static;
 }
 
 li {
@@ -91,14 +88,13 @@ li {
     vertical-align: top;
 }
 
-#price {
+.products_li > p:last-child {
     background: #fcee9c;
     text-align: center;
     font-size: 15px;
     color: #078a1b;
     font-weight: 700;
     padding: 5px 0;
-    width: 100%;
     max-width: 160px;
     margin: 3px auto;
 }
