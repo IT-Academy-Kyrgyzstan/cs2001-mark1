@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -18,10 +17,5 @@ namespace DataAccess
         public string Description { get; set; }
 
         public string Image { get; set; }
-                
-        [Range(typeof(decimal), "0", "9999999.99")]
-        [DefaultValue(0.01)]
-        public decimal Price { get; set; }
-
     }
 }

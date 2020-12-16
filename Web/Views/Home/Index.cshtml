@@ -14,15 +14,14 @@
 <br />
 <p class="text-center" style="font-size: large">All products:</p>
 
-<ul class="products_ul">
+<ul>
     @{
         foreach (var product in @Model)
         {
-            <li class="products_li">
+            <li>
                 <img src="@product.Image" />
                 <h2>@product.Title</h2>
                 <p>@product.Description</p>
-                <p id="price">@product.Price</p>
             </li>
         }
     }
