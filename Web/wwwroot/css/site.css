@@ -74,6 +74,27 @@ ul {
     list-style-type: none;
 }
 
+.products_ul {
+    display: block;
+}
+
 li {
     margin: 16px 4px;
+}
+
+.products_li {
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+}
+
+.products_li > p:last-child {
+    background: #fcee9c;
+    text-align: center;
+    font-size: 15px;
+    color: #078a1b;
+    font-weight: 700;
+    padding: 5px 0;
+    max-width: 160px;
+    margin: 3px auto;
 }
