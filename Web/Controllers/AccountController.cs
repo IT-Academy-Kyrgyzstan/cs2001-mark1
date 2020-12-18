@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Web.Models;
@@ -15,7 +17,7 @@ namespace Web.Controllers
     public class AccountController : Controller
     {
         private readonly AppContext db;
-        
+
         public AccountController(IConfiguration configuration)
         {
             db = new AppContext(configuration["ConnectionString"]);
@@ -59,6 +61,34 @@ namespace Web.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account");
+        }
+
+        public IActionResult Registration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Registration([FromForm] User user)
+        {
+
+            db.Users.AddRange(new List<User>
+            {
+                new User{Name = user.Name, LastName = user.LastName, Login = user.Login, Password = user.Password, PasswordConfirm = user.PasswordConfirm, Email = user.Email }
+            });
+            if (user.Password != user.PasswordConfirm)
+            {
+                throw new ArgumentException("Пароли не совпадают");
+            }
+            else
+            {
+                db.SaveChanges();
+
+                var newUser = db.Users.ToList();
+                return RedirectToAction("Login", newUser);
+            }
+
+
         }
     }
 }
