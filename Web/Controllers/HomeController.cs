@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +22,6 @@ namespace Web.Controllers
             db = new AppContext(configuration["ConnectionString"]);
         }
 
-
         public async Task<IActionResult> Index()
         {
             var products = await db.Products.ToListAsync();
@@ -33,8 +29,7 @@ namespace Web.Controllers
             return View(products);
         }
 
-        [Authorize]
-        public IActionResult Settings()
+        public IActionResult Privacy()
         {
             return View();
         }
@@ -42,7 +37,9 @@ namespace Web.Controllers
         {
             return View();
         }
-        public IActionResult Privacy()
+
+        [Authorize]
+        public IActionResult Settings()
         {
             return View();
         }

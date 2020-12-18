@@ -4,10 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Web.Models;
@@ -18,12 +15,9 @@ namespace Web.Controllers
     public class AccountController : Controller
     {
         private readonly AppContext db;
-        private readonly ILogger<HomeController> _logger;
         
-        public AccountController(ILogger<HomeController> logger, IConfiguration configuration)
+        public AccountController(IConfiguration configuration)
         {
-            _logger = logger;
-
             db = new AppContext(configuration["ConnectionString"]);
         }
 
@@ -57,7 +51,6 @@ namespace Web.Controllers
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
             };
-
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }

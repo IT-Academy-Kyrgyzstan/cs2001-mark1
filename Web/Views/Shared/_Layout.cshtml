@@ -38,10 +38,10 @@
                 </div>
             </div>
             @if (User.Identity.IsAuthenticated)
-            {<form>
+            {<div>
                     <p>@User.Identity.Name</p>
                     <a asp-controller="Account" asp-action="Logout">Log out</a>
-             </form>
+             </div>
             }
             else
             {
