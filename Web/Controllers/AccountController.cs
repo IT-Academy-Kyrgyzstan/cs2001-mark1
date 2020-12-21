@@ -67,28 +67,34 @@ namespace Web.Controllers
         {
             return View();
         }
-
         [HttpPost]
-        public IActionResult Registration([FromForm] User user)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Registration(RegisterModel model)
         {
+            if (ModelState.IsValid)
+            {
+                User ucheck = null;
+                using (AppContext db = new DataAccess.AppContext())
+                {
+                    ucheck = db.Users.FirstOrDefault(t => t.Login == model.Login);
 
-            db.Users.AddRange(new List<User>
-            {
-                new User{Name = user.Name, LastName = user.LastName, Login = user.Login, Password = user.Password, PasswordConfirm = user.PasswordConfirm, Email = user.Email }
-            });
-            if (user.Password != user.PasswordConfirm)
-            {
-                throw new ArgumentException("Пароли не совпадают");
+
+                    if (ucheck == null)
+                    {
+                        //if (model.Password != model.ConfirmPassword)
+                        //{
+                        //    ModelState.AddModelError("", "Пароли не совпадают");
+                        //}
+                        //else
+                        //{
+                            db.Users.Add(new DataAccess.User { Login = model.Login, Name = model.Name, Password = model.Password, Phone = model.Phone });
+                            db.SaveChanges();
+                        
+                    }
+
+                }
             }
-            else
-            {
-                db.SaveChanges();
-
-                var newUser = db.Users.ToList();
-                return RedirectToAction("Login", newUser);
-            }
-
-
+            return View("Model");
         }
     }
 }
