@@ -1,9 +1,10 @@
-﻿h1{
+﻿.about-us-h1 {
     color:dodgerblue;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align:center;
 }
-p {
+
+.about-us-p {
     color:midnightblue;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     position: relative; 
