@@ -7,9 +7,13 @@ namespace DataAccess
       
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }                
+        [MaxLength(10)]
+        public string Name { get; set; }
+        [MaxLength(10)]
         public string Login { get; set; }
-        public string Password { get; set; }                
+        [MaxLength(10)]
+        public string Password { get; set; }
+        [MaxLength(20)]
         public string Phone { get; set; }
     }
 }
