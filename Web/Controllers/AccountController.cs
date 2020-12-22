@@ -63,38 +63,34 @@ namespace Web.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        [HttpGet]
         public IActionResult Registration()
         {
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registration(RegisterModel model)
         {
-            if (ModelState.IsValid)
+            if (model == null)
             {
-                User ucheck = null;
-                using (AppContext db = new DataAccess.AppContext())
-                {
-                    ucheck = db.Users.FirstOrDefault(t => t.Login == model.Login);
-
-
-                    if (ucheck == null)
-                    {
-                        //if (model.Password != model.ConfirmPassword)
-                        //{
-                        //    ModelState.AddModelError("", "Пароли не совпадают");
-                        //}
-                        //else
-                        //{
-                            db.Users.Add(new DataAccess.User { Login = model.Login, Name = model.Name, Password = model.Password, Phone = model.Phone });
-                            db.SaveChanges();
-                        
-                    }
-
-                }
+                ModelState.AddModelError("", "Вы заполнили не правильно");
             }
-            return View("Model");
+            if (ModelState.IsValid)
+            {   
+                    User user = await db.Users.FirstOrDefaultAsync((t => t.Login == model.Login));
+
+                    if (user == null)
+                    {
+                            await db.Users.AddAsync(new DataAccess.User 
+                            { Login = model.Login, Name = model.Name,
+                              Password = model.Password, Phone = model.Phone 
+                            });
+                            await db.SaveChangesAsync();
+                        return RedirectToAction("Login", "Account");
+                    } 
+                
+            }
+            return View (model);
         }
     }
 }
