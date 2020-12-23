@@ -43,9 +43,22 @@ namespace Web.Controllers
         }
 
         [Authorize]
-        public IActionResult Settings()
+        public async Task<IActionResult> Settings(User userNewPassword)
         {
-            return View();
+            var userLogin = User.Identity.Name;
+            var allUser = await db.Users.ToListAsync();
+
+            if(userNewPassword.Password != null)
+            {
+                var userOldPassword = await db.Users.FirstOrDefaultAsync(t => t.Login == userLogin);
+                userOldPassword.Password = userNewPassword.Password;
+
+                db.SaveChanges();
+
+                return View(allUser.Where(u => u.Login == userLogin));
+            }
+
+            return View(allUser.Where(u => u.Login == userLogin));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

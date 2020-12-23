@@ -38,7 +38,7 @@ namespace Web.Controllers
                 User user = await db.Users.FirstOrDefaultAsync(u => u.Login == model.Login && u.Password == model.Password);
                 if (user != null)
                 {
-                    await Authenticate(user.Name);
+                    await Authenticate(user.Login);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -68,29 +68,30 @@ namespace Web.Controllers
         {
             return View();
         }
+        
         [HttpPost]
         public async Task<IActionResult> Registration(RegisterModel model)
         {
-            if (model == null)
-            {
-                ModelState.AddModelError("", "Вы заполнили не правильно");
-            }
             if (ModelState.IsValid)
             {   
                     User user = await db.Users.FirstOrDefaultAsync((t => t.Login == model.Login));
-
                     if (user == null)
                     {
-                            await db.Users.AddAsync(new DataAccess.User 
-                            { Login = model.Login, Name = model.Name,
-                              Password = model.Password, Phone = model.Phone 
+                            await db.Users.AddAsync(new DataAccess.User
+                            { 
+                                Login = model.Login, 
+                                Name = model.Name,
+                                Password = model.Password, 
+                                Phone = model.Phone ,
+                                Email = model.Email
                             });
                             await db.SaveChangesAsync();
                         return RedirectToAction("Login", "Account");
-                    } 
-                
+                    }
+                ModelState.AddModelError("", "Login is already taken");
             }
             return View (model);
         }
     }
 }
+
