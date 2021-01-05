@@ -15,10 +15,6 @@ namespace DataAccess
             Database.EnsureCreated();
         }
 
-        public AppContext()
-        {
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
             => builder.UseSqlServer(_connectionString);
     }

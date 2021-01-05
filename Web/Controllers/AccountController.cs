@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -47,11 +48,11 @@ namespace Web.Controllers
             return View(model);
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(string userLogin)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userLogin)
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
@@ -77,7 +78,7 @@ namespace Web.Controllers
                     User user = await db.Users.FirstOrDefaultAsync((t => t.Login == model.Login));
                     if (user == null)
                     {
-                            await db.Users.AddAsync(new DataAccess.User
+                            db.Users.Add(new DataAccess.User
                             { 
                                 Login = model.Login, 
                                 Name = model.Name,
@@ -91,6 +92,28 @@ namespace Web.Controllers
                 ModelState.AddModelError("", "Login is already taken");
             }
             return View (model);
+        }
+
+
+        [Authorize]
+        public async Task<IActionResult> Settings(SettingsModel newUserValues)
+        {
+            var userLogin = User.Identity.Name;
+            var user = await db.Users.FirstOrDefaultAsync(t => t.Login == userLogin);
+
+            if (newUserValues != null)
+            {
+                if (user.Password == newUserValues.OldPassword)
+                {
+                    user.Password = newUserValues.NewPassword;
+                    await db.SaveChangesAsync();
+                }
+
+
+                return View(user);
+            }
+
+            return View(user);
         }
     }
 }

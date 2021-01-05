@@ -4,7 +4,6 @@ namespace DataAccess
 {
     public class User
     {
-
         [Key]
         public int Id { get; set; }
 
