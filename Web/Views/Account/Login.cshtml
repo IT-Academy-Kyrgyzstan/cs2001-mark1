@@ -22,7 +22,7 @@
                 <input type="submit" value="Войти" />
             </div>
             <div class="form-group">
-                <a asp-action="Index" asp-controller="Home">Регистрация (заглушка для страницы регистрации)</a>
+                <button type="button" onclick="location.href='@Url.Action("Registration", "Account")'">Registration</button>
             </div>
         </div>
     </form>

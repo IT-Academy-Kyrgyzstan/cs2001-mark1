@@ -1,0 +1,25 @@
+﻿@using DataAccess
+@model User  
+
+@{
+    ViewData["Title"] = "Settings";
+}
+<h1>@ViewData["Title"]</h1>
+@{ 
+    <p>Name: @Model.Name</p>
+    <p>Login: @Model.Login</p>
+    <p>Phone: @Model.Phone</p>
+    <p>Email: @Model.Email</p>
+    <p>Password: @Model.Password</p>
+   
+    <form asp-action="Settings" asp-controller="Account" asp-anti-forgery="true">
+        <div class="form-group">
+            <input type="text" name="OldPassword" placeholder="Old password" />
+            <input type="text" name="NewPassword" placeholder="New password" />
+            <input type="text" name="ConfirmNewPassword" placeholder="Confirm new password"  />
+            @*<span asp-validation-for="ConfirmNewPassword" />*@
+            <button>Change</button>
+        </div>
+    </form>
+}
+

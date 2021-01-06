@@ -1,6 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,12 +35,6 @@ namespace Web.Controllers
             return View();
         }
         public IActionResult AboutUs()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public IActionResult Settings()
         {
             return View();
         }
